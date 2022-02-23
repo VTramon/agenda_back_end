@@ -3,13 +3,17 @@ import { DeleteContatoService } from '../Services/DeleteContatoService'
 
 class DeleteContatoController {
   async handle(req: Request, res: Response) {
-    const { id } = req.body
+    try {
+      const { id } = req.body
 
-    const service = new DeleteContatoService().execute
+      const service = new DeleteContatoService().execute
 
-    const result = service(id)
+      const result = await service(id)
 
-    return result
+      return res.json(`contato de id ${result.id} deletado com sucesso`)
+    } catch (error) {
+      res.json(error.message)
+    }
   }
 }
 

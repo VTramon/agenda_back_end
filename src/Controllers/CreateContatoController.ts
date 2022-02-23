@@ -3,13 +3,17 @@ import { CreateContatoService } from '../Services/CreateContatoService'
 
 class CreateContatoController {
   async handle(req: Request, res: Response) {
-    const { nome, email, telefone, imagem } = req.body
+    try {
+      const { nome, email, telefone, imagem } = req.body
 
-    const service = new CreateContatoService().execute
+      const service = new CreateContatoService().execute
 
-    const result = service(nome, email, telefone, imagem)
+      const result = await service(nome, email, telefone, imagem)
 
-    return result
+      return res.json('contato criado com sucesso')
+    } catch (error) {
+      res.json(error.message)
+    }
   }
 }
 

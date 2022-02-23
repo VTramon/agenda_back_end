@@ -2,11 +2,16 @@ import { prismaClient } from '../prismaClient'
 
 class DeleteContatoService {
   async execute(id: string) {
-    const Contato = await prismaClient.contatos.delete({
-      where: {
-        id: id,
-      },
-    })
+    try {
+      const Contato = await prismaClient.contatos.delete({
+        where: {
+          id: id,
+        },
+      })
+      return Contato
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
