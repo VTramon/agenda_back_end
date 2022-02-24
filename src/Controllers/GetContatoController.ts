@@ -6,7 +6,6 @@ class GetContatoController {
     try {
       const service = new GetContatoService().execute
       const result = await service()
-      console.log(result)
 
       return res.json(result)
     } catch (error) {

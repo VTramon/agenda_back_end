@@ -4,11 +4,11 @@ import { UpdateContatoService } from '../Services/UpdateContatoService'
 class UpdateContatoController {
   async handle(req: Request, res: Response) {
     try {
-      const { nome, email, telefone, imagem, id } = req.body
+      const { id, nome, telefone, email, imagem } = req.body
 
       const service = new UpdateContatoService().execute
 
-      const result = await service(nome, email, telefone, imagem, id)
+      const result = await service(id, nome, telefone, email, imagem)
 
       return res.json(`o contato de id ${result.id} foi atualzado`)
     } catch (error) {

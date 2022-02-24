@@ -2,11 +2,11 @@ import { prismaClient } from '../prismaClient'
 
 class UpdateContatoService {
   async execute(
-    nome: string,
-    email: string,
-    telefone: string,
-    imagem: string,
-    id: string
+    id: string,
+    nome?: string,
+    telefone?: string,
+    email?: string,
+    imagem?: string
   ) {
     try {
       const Contato = await prismaClient.contatos.update({
@@ -22,8 +22,8 @@ class UpdateContatoService {
       })
 
       return Contato
-    } catch (error) {
-      console.log(error)
+    } catch (error: any) {
+      return error.message
     }
   }
 }
